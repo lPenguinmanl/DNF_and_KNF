@@ -1,6 +1,6 @@
 ﻿#include<iostream>
 #include<fstream>
-#include"DNF_CNF.h"
+#include<math.h>
 using namespace std;
 int main()
 {
@@ -24,5 +24,15 @@ int main()
 		cout << "Error data in file" << endl;
 		exit(0);
 	}
+
 	return 0;
+}
+bool Is_log2(int n)
+{
+	if (n == 0) {
+		return false;
+	}
+
+	for (; n % 2 == 0; n /= 2);
+	return (n == 1);
 }
