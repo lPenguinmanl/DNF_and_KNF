@@ -1,8 +1,10 @@
 ﻿#include<iostream>
 #include<fstream>
 #include<math.h>
+#include<list>
 using namespace std;
 bool Is_exp_of_2(int n);
+void DNF(int I, int x);
 int main()
 {
 	ifstream File("FUNCTIONS.txt");
@@ -32,6 +34,7 @@ int main()
 	{
 		file>>Function[i];
 	}
+	/*
 	//посторйка КНФ
 	for (int i = 0; i < amount; i++)
 	{
@@ -48,6 +51,8 @@ int main()
 
 		}
 	}
+	*/
+	DNF(3,4);
 	file.close();
 	return 0;
 }
@@ -59,4 +64,25 @@ bool Is_exp_of_2(int n)
 
 	for (; n % 2 == 0; n /= 2);
 	return (n == 1);
+}
+void DNF(int I, int x)
+{
+	//массив переменных которые будем использовать для построение ДНФ
+	char* variables = new char[x];
+	int* Bin = new int[x];
+	int now =0 ;
+	for (int i = 0; i < x; i++)
+	{
+		variables[i] = 97 + i;
+	}
+	while (I!=0)
+	{ 
+		Bin[now] = I % 2;
+		I /= 2;
+		now++;
+	}
+	for (int i = 0; i < x; i++)
+	{
+		cout << Bin[i];
+	}
 }
