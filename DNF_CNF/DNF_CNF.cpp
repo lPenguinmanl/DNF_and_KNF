@@ -1,7 +1,6 @@
 ﻿#include<iostream>
 #include<fstream>
 #include<math.h>
-#include<list>
 #include<algorithm>
 using namespace std;
 bool Is_exp_of_2(int n);
@@ -95,29 +94,22 @@ void DNF(int I, int size)
 	//массив переменных которые будем использовать для построение ДНФ
 	char* variables = new char[size];
 	int* Bin = new int[size];
-	int now = 0 ;
+	int now = 1 ;
 	for (int i = 0; i < size; i++)
 	{
 		variables[i] = 97 + i;
 	}
 	while (I != 0)
 	{
-		Bin[now] = I % 2;
+		Bin[size - now] = I % 2;
 		I /= 2;
 		now++;// позиция последнего добавленого элемента
 	}
-	if (now != size - 1)
-	{
-		for (int i = 0; i < now + 1; i++)
-		{
-			swap(Bin[now - i], Bin[size - i]);
-		}
-	}
 	int k = 0;
 	cout << "(";
-	for (int i = size - 1; i >= 0; i--)
+	for (int i = 0; i <size; i++)
 	{
-		if (i == 0)
+		if (i == size-1)
 		{
 			if (Bin[i] != 1)
 			{
@@ -145,34 +137,27 @@ void DNF(int I, int size)
 }
 void CNF(int I, int size)
 {
-	//массив переменных которые будем использовать для построение ДНФ
+	//массив переменных которые будем использовать для построение КНФ
 	char* variables = new char[size];
 	int* Bin = new int[size];
-	int now = 0;
+	int now = 1;
 	for (int i = 0; i < size; i++)
 	{
 		variables[i] = 97 + i;
 	}
 	while (I != 0)
 	{
-		Bin[now] = I % 2;
+		Bin[size -now] = I % 2;
 		I /= 2;
 		now++;// позиция последнего добавленого элемента
 	}
-	if (now != size - 1)
-	{
-		for (int i = 0; i < now + 1; i++)
-		{
-			swap(Bin[now - i], Bin[size - i]);
-		}
-	}
 	int k = 0;
 	cout << "(";
-	for (int i = size - 1; i >= 0; i--)
+	for (int i = 0; i < size; i++)
 	{
-		if (i == 0)
+		if (i == size-1)
 		{
-			if (Bin[i] != 1)
+			if (Bin[i] !=1)
 			{
 				cout << variables[size - 1]<<")";
 			}
@@ -183,7 +168,7 @@ void CNF(int I, int size)
 		}
 		else
 		{
-			if (Bin[i] != 1)
+			if (Bin[i] !=1)
 			{
 				cout << variables[k] << "|";
 			}
